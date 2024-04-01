@@ -17,10 +17,11 @@ nav {
     
     background-color: rgba(0, 0, 0, .2);
     backdrop-filter:blur(10px) ;
-    padding: 0 5%;
+   
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0.7rem 0  0.7rem 5%  ;
 
 }
 nav .logo { 
@@ -44,20 +45,21 @@ nav .links {
 }
 nav .links li {
     list-style: none;
+    font-size: 14px;
 }
-nav .links a {
+nav .links li {
     display: block;
-    padding: 1em;
+   cursor: pointer;
     font-size: 16px;
     font-weight: bold;
     color: #fff;
     text-decoration: none;
     position: relative;
 }
-nav .links a:hover {
+nav .links li:hover {
     color: white;
 }
-nav .links a::before {
+nav .links li::before {
     content: "";
     position: absolute;
     bottom: 0;
@@ -69,7 +71,7 @@ nav .links a::before {
     transform: scaleX(0);
     transition: all 0.3s ease-in-out 0s;
 }
-nav .links a:hover::before {
+nav .links li:hover::before {
     visibility: visible;
     transform: scaleX(1);
     color: white;
@@ -134,3 +136,36 @@ nav .icon-burger .line {
         opacity: 0;
     }
 }
+
+
+button {
+    cursor: pointer;
+    border: 0;
+    border-radius: 4px;
+    font-weight: 600;
+    margin: 0 10px;
+    width: 200px;
+    padding: 10px 0;
+    box-shadow: 0 0 20px rgba(104, 85, 224, 0.2);
+    transition: 0.4s;
+  }
+  
+  .reg {
+    color: white;
+    background-color: rgba(104, 85, 224, 1);
+  }
+  
+  .log {
+    color: rgb(104, 85, 224);
+    background-color: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(104, 85, 224, 1);
+  }
+  
+  button:hover {
+    color: white;
+   
+    box-shadow: 0 0 20px rgba(104, 85, 224, 0.6);
+    background-color: rgba(104, 85, 224, 1);
+  }
+  
+  
