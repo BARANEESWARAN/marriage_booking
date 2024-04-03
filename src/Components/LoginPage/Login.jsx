@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import "./Login.css"
 import {SignInButton} from "./signin"
-import { Button, Checkbox, Input } from 'antd';
+import { Button, Checkbox, Input ,DatePicker,Drawer } from 'antd';
 import Header, { UserHeader } from '../Header/Header';
+import ForgotPassword from './ForgotPassword';
+import { FacebookOutlined, TwitterOutlined, GoogleOutlined, InstagramOutlined, YoutubeOutlined } from '@ant-design/icons';
+
 
 
 
@@ -11,6 +14,15 @@ import Header, { UserHeader } from '../Header/Header';
 
   function Login() {
     const [counter, setCounter] = useState(1);
+    const[register,setRegister]=useState(true)
+
+    const [open, setOpen] = useState(false);
+  const showDrawer = () => {
+    setOpen(true);
+  };
+  const onClose = () => {
+    setOpen(false);
+  };
     useEffect(() => {
         const interval = setInterval(() => {
           document.getElementById(`radio${counter}`).checked=true;
@@ -22,7 +34,9 @@ import Header, { UserHeader } from '../Header/Header';
     
 
 
-
+      const onChange = (date, dateString) => {
+        console.log(date, dateString);
+      };
 
        
   
@@ -76,6 +90,16 @@ import Header, { UserHeader } from '../Header/Header';
         <label htmlFor="radio4" className="manual"></label>
       </div>
     </div>
+
+{
+
+  register?
+  (
+    <>
+     <Drawer title="Forgot Password" onClose={onClose} open={open}>
+     <ForgotPassword/>
+      </Drawer>
+    
     <div className='login'>
     <div className="limiter">
        
@@ -96,24 +120,91 @@ import Header, { UserHeader } from '../Header/Header';
      <Checkbox > <div className='remember-me'>Remember me</div></Checkbox>
      </div>
 
-   <a  href="" className='forgot'>
+   <span  className='forgot' onClick={showDrawer}>
      Forgot password
-   </a>
+   </span>
 </div>
         <div className='login-btns '>
           <button className='submit-btn' >Login</button>
           
-          <SignInButton />
+         
           </div>
+          <div className="middle">
+      <Button type="primary" shape="circle" className="btn" href="#">
+        <FacebookOutlined />
+      </Button>
+      <Button type="primary" shape="circle" className="btn" href="#">
+        <GoogleOutlined />
+      </Button>
+      <Button type="primary" shape="circle" className="btn" href="#">
+        <TwitterOutlined />
+      </Button>
+    
+     
+    </div>
+
+ 
+
+
+
+
+
           <div className="login-signup">
             Don't have an account?{' '}
-            <span className="login-signup-bold">Register</span>
+            <span className="login-signup-bold" onClick={()=>setRegister(!register)}>Register</span>
           </div>
+
+ 
       </form>
       </div>
 
     </div>
     </div>
+
+    </>
+  ):
+
+  (
+    <div className='login'>
+    <div className="limiter">
+       
+
+    <div className="register-container">
+      <form className="register-form">
+      <h2 className="register-header">Register</h2>
+      <Input className='input-field' type="text" placeholder="username" />
+          <Input className='input-field' type="email" placeholder="Email" />
+       
+      
+          <Input.Password className='input-field' type="password" placeholder="Password" />
+          <DatePicker onChange={onChange} placeholder="DOB" className='input-field'/>
+
+        <div className='login-btns '>
+          <button className='submit-btn' >Register</button>
+          <div className="login-signup">
+            Already have an account?{' '}
+            <span className="login-signup-bold" onClick={()=>setRegister(!register)}>Login</span>
+          </div>
+          
+          </div>
+        
+      </form>
+      </div>
+
+    </div>
+    </div>
+  )
+}
+
+
+
+
+
+
+
+
+
+  
   </div>
   </>
   

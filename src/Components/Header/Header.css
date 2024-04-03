@@ -71,6 +71,8 @@ nav .links li::before {
     transform: scaleX(0);
     transition: all 0.3s ease-in-out 0s;
 }
+
+
 nav .links li:hover::before {
     visibility: visible;
     transform: scaleX(1);
@@ -137,7 +139,7 @@ nav .icon-burger .line {
     }
 }
 
-
+/* 
 button {
     cursor: pointer;
     border: 0;
@@ -166,6 +168,6 @@ button {
    
     box-shadow: 0 0 20px rgba(104, 85, 224, 0.6);
     background-color: rgba(104, 85, 224, 1);
-  }
+  } */
   
   

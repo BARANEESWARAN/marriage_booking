@@ -71,10 +71,11 @@ export function AdminHeader() {
         <div className="logo"><strong style={{ color: "blue" }}>v</strong>ms</div>
         <ul className="links">
     
-      
+        <button className="reg" onClick={()=>navigate("/admindashboard")}>Dashboard</button>
          <button className="log" onClick={()=>navigate("/login")}>Login</button>
       
          
+      
        
   
   
