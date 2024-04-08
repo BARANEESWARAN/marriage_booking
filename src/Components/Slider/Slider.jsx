@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import './Slider.css';
-import Header from '../Header/Header';
+
 import ImgOne from "../../assets/bgone.jpg"
 import ImgTwo from "../../assets/bgtwo.jpg"
 import ImgThree from "../../assets/bgthree.jpg"
 import ImgFour from "../../assets/bgfour.jpg"
-
+import {NavLink} from "react-router-dom"
 function Slider() {
   const nextRef = useRef(null);
   const prevRef = useRef(null);
@@ -75,7 +75,7 @@ function Slider() {
           It's time to celebrate! the best event organizers
           </div>
           <div className="buttons">
-            <button>Book Now</button>
+          <button>   <NavLink to={'/userregister'}>Book Now</NavLink></button>
            
           </div>
         </div>
@@ -90,7 +90,7 @@ function Slider() {
           It's time to celebrate! the best event organizers
           </div>
           <div className="buttons">
-            <button>Book Now</button>
+          <button>   <NavLink to={'/userregister'}>Book Now</NavLink></button>
            
           </div>
         </div>
@@ -105,7 +105,7 @@ function Slider() {
           It's time to celebrate! the best event organizers
           </div>
           <div className="buttons">
-            <button>Book Now</button>
+          <button>   <NavLink to={'/userregister'}>Book Now</NavLink></button>
            
           </div>
         </div>
@@ -120,7 +120,7 @@ function Slider() {
           It's time to celebrate! the best event organizers
           </div>
           <div className="buttons">
-            <button>Book Now</button>
+          <button>   <NavLink to={'/userregister'}>Book Now</NavLink></button>
            
           </div>
         </div>

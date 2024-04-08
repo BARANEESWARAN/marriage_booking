@@ -54,8 +54,8 @@
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   width: 60%;
-  min-height: 12rem;
-
+  min-height: 11rem;
+margin-top: 3rem;
   background: #91B3D1 url("https://cdn.pixabay.com/photo/2012/04/24/23/52/wedding-41210_640.png") no-repeat;
   background-size: auto;
   background-position: top;
@@ -90,7 +90,7 @@
 .login-container {
  
   width: 60%;
-  height: 55vh;
+  height: 60vh;
   background: #ebebeb;
  border-bottom-right-radius: 5px;
 border-bottom-left-radius: 5px;

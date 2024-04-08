@@ -12,8 +12,8 @@ const navigate=useNavigate()
          
  <nav>
       <input type="checkbox" id="nav-toggle" />
-      <div className="logo"><strong style={{ color: "blue" }}>v</strong>ms</div>
-      <ul className="links">
+      <div className="logo"><strong style={{ color: "blue" }}>v</strong><NavLink to={"/"}>ms</NavLink>    </div>
+      {/* <ul className="links">
       <li className='home' onClick={()=>navigate("/")}>Home</li>
    
 
@@ -27,7 +27,7 @@ const navigate=useNavigate()
       
       
      
-      </ul>
+      </ul> */}
       <label htmlFor="nav-toggle" className="icon-burger">
         <div className="line"></div>
         <div className="line"></div>
@@ -68,14 +68,20 @@ export function AdminHeader() {
            
    <nav>
         <input type="checkbox" id="nav-toggle" />
-        <div className="logo"><strong style={{ color: "blue" }}>v</strong>ms</div>
+        <div className="logo"><strong style={{ color: "blue" }}>v</strong><NavLink to={"/"}>ms</NavLink>    </div>
         <ul className="links">
     
-        <button className="reg" onClick={()=>navigate("/admindashboard")}>Dashboard</button>
-         <button className="log" onClick={()=>navigate("/login")}>Login</button>
-      
+        {/* <button className="button-65" onClick={()=>navigate("/admindashboard")}>Dashboard</button> */}
+         {/* <button className="log" onClick={()=>navigate("/login")}>Login</button> */}
+      <div></div>
          
-      
+         <div class="button-div">
+    
+    <button className="signup-button" onClick={()=>navigate("/admindashboard")}>Dashboard</button>
+    <button className="login-button" onClick={()=>navigate("/login")}>Login</button>
+    
+    
+</div>
        
   
   

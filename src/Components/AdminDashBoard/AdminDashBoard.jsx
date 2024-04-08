@@ -17,7 +17,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 
 function AdminDashBoard() {
   const [collapsed, setCollapsed] = useState(false);
-  const [selectedKey, setSelectedKey] = useState('2'); // Default selected key
+  const [selectedKey, setSelectedKey] = useState('4'); // Default selected key
   const navigate = useNavigate();
 
   const toggleCollapsed = () => {
@@ -76,17 +76,17 @@ function AdminDashBoard() {
 
 <div className="dashboard_container">
   <div   className={collapsed?"small_sidebar" :"sidebar"}>
-  <div style={{ width: 208 }}>
+  <div style={{ width: 220 }}>
           <Button
             type="primary"
             onClick={toggleCollapsed}
-            style={collapsed?{ marginBottom: 12,marginLeft:4,marginTop:4,
-              borderRadius:6,
-              width:"35%",
+            style={collapsed?{ marginBottom: 11,marginLeft:0,marginTop:4,
+              borderRadius:2,
+              width:"36%",
               display:"flex",
               alignItems:"center",
               justifyContent:"center"
-            }:{ marginBottom: 12,marginLeft:4,marginTop:4,borderRadius:6 }}
+            }:{  width:"100%", marginBottom: 11,marginLeft:0,marginTop:4,borderRadius:2 }}
           >
             {collapsed ?(
               <div style={{display:"flex",alignItems:"center",gap:"1rem"}}>

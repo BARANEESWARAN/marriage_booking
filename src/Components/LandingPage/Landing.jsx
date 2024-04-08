@@ -1,6 +1,6 @@
 import React from 'react';
 import './Landing.css';
-import Header, { AdminHeader } from '../Header/Header';
+import  { AdminHeader } from '../Header/Header';
 import Slider from '../Slider/Slider';
 
 
