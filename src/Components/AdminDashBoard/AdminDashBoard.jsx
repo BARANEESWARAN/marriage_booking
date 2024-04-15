@@ -1,138 +1,179 @@
 import React, { useState } from 'react';
-import "./AdminDashBoard.css"
-import UserDetails from "../UserDetails/UserDetails"
+import "./AdminDashBoard.css";
+import { BiLogOut } from "react-icons/bi";
+import { IoNotifications } from "react-icons/io5";
+
+
 import {
   AppstoreOutlined,
   ContainerOutlined,
   DesktopOutlined,
-  MailOutlined,
+  DashboardOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   PieChartOutlined,
-  ProfileOutlined,
-  HomeOutlined
+
 } from '@ant-design/icons';
-import { Button, Menu } from 'antd';
-import { NavLink, useNavigate } from 'react-router-dom';
+import UserDetails from '../UserDetails/UserDetails';
+import { useNavigate } from 'react-router-dom';
+import Dashboard from '../Dashboard/Dashboard';
+import CreateEvent from '../CreateEvent/CreateEvent';
 
 function AdminDashBoard() {
-  const [collapsed, setCollapsed] = useState(false);
-  const [selectedKey, setSelectedKey] = useState('4'); // Default selected key
-  const navigate = useNavigate();
-
-  const toggleCollapsed = () => {
-    setCollapsed(!collapsed);
+  const [isOpen, setIsOpen] = useState(false);
+  const [activeOption, setActiveOption] = useState('Dashboard');
+  const navigate = useNavigate()
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
   };
 
-  function getItem(label, key, icon, children, type) {
-    return {
-      key,
-      icon,
-      children,
-      label,
-      type,
-      onClick: () => handleMenuItemClick(key)
-    };
-  }
-
-  const handleMenuItemClick = (key) => {
-    setSelectedKey(key);
-    // Perform any other actions you need here
+  const handleOptionClick = (option) => {
+    setActiveOption(option);
   };
 
-  const items = [
-    getItem('Home', '1',<NavLink to={"/"}><HomeOutlined /></NavLink>),
-    getItem('Dashboard', '2', <PieChartOutlined />),
-    getItem('Schedule', '3', <DesktopOutlined />),
-    getItem('User Details', '4', <ContainerOutlined />),
-    getItem('Notification', '5', <MailOutlined />),
-    getItem('My Profile', '6', <AppstoreOutlined />),
-    getItem('Help & Support', '7', <MenuUnfoldOutlined />),
-    getItem('Logout', '8', <NavLink to={"/"}><HomeOutlined /></NavLink>),
-  ];
+  const Logout = () => {
+
+    navigate("/")
+
+
+  };
   const renderComponent = () => {
-    switch(selectedKey) {
-      
-      case '2':
-        return <div>Dashboard Component</div>;
-      case '3':
-        return <div>Schedule Component</div>;
-      case '4':
-        return <UserDetails />;
-      case '5':
-        return <div>Notification Component</div>;
-      case '6':
-        return <div>My Profile Component</div>;
-      case '7':
-        return <div>Help & Support Component</div>;
-      case '8':
-        navigate("/"); // Redirect to home page for logout
-        return null; // No need to render anything after redirect
+    switch (activeOption) {
+
+      case 'Dashboard':
+        return <Dashboard />;
+
+      case 'Create Event':
+        return "";
+
+      case 'Schedule':
+        return '';
+
+      case 'User Details':
+        return (
+          <div style={{ padding: "3rem 0", width: "95%", margin: "0 auto" }}>
+            <UserDetails />
+          </div>
+        );
+
+      case 'My Profile':
+        return '';
+
+      case 'Help & Support':
+        return '';
       default:
-        return null;
+        return '';
     }
   };
+
   return (
-
-<div className="dashboard_container">
-  <div   className={collapsed?"small_sidebar" :"sidebar"}>
-  <div style={{ width: 220 }}>
-          <Button
-            type="primary"
-            onClick={toggleCollapsed}
-            style={collapsed?{ marginBottom: 11,marginLeft:0,marginTop:4,
-              borderRadius:2,
-              width:"36%",
-              display:"flex",
-              alignItems:"center",
-              justifyContent:"center"
-            }:{  width:"100%", marginBottom: 11,marginLeft:0,marginTop:4,borderRadius:2 }}
-          >
-            {collapsed ?(
-              <div style={{display:"flex",alignItems:"center",gap:"1rem"}}>
-                <MenuUnfoldOutlined />
+    <>
+      <div className={`sidebar ${isOpen ? 'open' : ''}`}>
+        <div className="logo-details">
+          {
+            isOpen ?
+              <div style={{ display: "flex", width: "100%", alignItems: "center", justifyContent: "space-between" }}>
+                <div className="logo_name">SideMenu</div>
+                <i onClick={toggleSidebar} style={{ cursor: "pointer" }}> <MenuFoldOutlined /></i>
               </div>
-            )  :
-            (
-              <div style={{display:"flex",alignItems:"center",gap:"1rem"}}>
-                <MenuFoldOutlined />
-                <span style={{fontWeight:"bold"}}>Admin</span> 
-              </div>
-            )}
-          </Button>
-          <Menu
-            defaultSelectedKeys={[selectedKey]}
-            defaultOpenKeys={['sub1']}
-            mode="inline"
-            theme="dark"
-            inlineCollapsed={collapsed}
-            items={items}
-            style={{height:"92vh"}}
-          />
+              :
+              <i className={`bx`} id="btn" onClick={toggleSidebar}><MenuUnfoldOutlined /></i>
+          }
         </div>
-  </div>
-  <div     className={collapsed?"main-content" :"small_main-content"}>
-{renderComponent()}
-  </div>
-</div>
+        <ul className="nav-list">
+          <li className={activeOption === 'Dashboard' ? 'active' : ''}>
+            <a onClick={() => handleOptionClick('Dashboard')}>
+              <i><DashboardOutlined /></i>
+              <span className="links_name">Dashboard</span>
+            </a>
+            <span className="tooltip">Dashboard</span>
+          </li>
+          <li className={activeOption === 'User Details' ? 'active' : ''}>
+            <a onClick={() => handleOptionClick('User Details')}>
+              <i><ContainerOutlined /></i>
+              <span className="links_name">User Details</span>
+            </a>
+            <span className="tooltip">User Details</span>
+          </li>
+
+          <li className={activeOption === 'Create Event' ? 'active' : ''}>
+            <a onClick={() => handleOptionClick('Create Event')}>
+              <i><PieChartOutlined /></i>
+              <span className="links_name">Create Event</span>
+            </a>
+            <span className="tooltip">Create Event</span>
+          </li>
 
 
 
 
 
 
+          <li className={activeOption === 'Schedule' ? 'active' : ''}>
+            <a onClick={() => handleOptionClick('Schedule')}>
+              <i><DesktopOutlined /></i>
+              <span className="links_name">Schedule</span>
+            </a>
+            <span className="tooltip">Schedule</span>
+          </li>
+      
+          <li className={activeOption === 'My Profile' ? 'active' : ''}>
+            <a onClick={() => handleOptionClick('My Profile')}>
+              <i><AppstoreOutlined /></i>
+              <span className="links_name">My Profile</span>
+            </a>
+            <span className="tooltip">My Profile</span>
+          </li>
+          <li className={activeOption === 'Help & Support' ? 'active' : ''}>
+            <a onClick={() => handleOptionClick('Help & Support')}>
+              <i><MenuUnfoldOutlined /></i>
+              <span className="links_name">Help & Support</span>
+            </a>
+            <span className="tooltip">Help & Support</span>
+          </li>
+          <li className="profile">
+            {isOpen ? (
+              <a className="logout" onClick={Logout}>
+                <i><BiLogOut /></i>
+                <span>Logout</span>
+              </a>
+            ) : (
+              <a className="logout" onClick={Logout}>
+                <i><BiLogOut /></i>
+              </a>
+            )}
+          </li>
+        </ul>
 
+      </div>
+      <section className="home-section">
 
+        <section id="content">
+          <nav>
 
+            <h4>{activeOption}</h4>
+            <form action="#">
+              <div class="form-input">
+                <input type="search" placeholder="Search..." />
+                <button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+              </div>
+            </form>
+            <input type="checkbox" id="switch-mode" hidden />
 
+            <a href="#" class="notification">
+              <IoNotifications />
+              <span class="num">8</span>
+            </a>
+            <a href="#" class="profile">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw2iMTKL4JKh2Rc0f2RtU8-2QQr-Jj-9TVTA&s" />
+            </a>
+          </nav>
+        </section>
 
+        {renderComponent()}
 
-
-
-
-
-
-
+      </section>
+    </>
   );
 }
 

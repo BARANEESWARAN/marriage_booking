@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import "./Login.css"
-import {SignInButton} from "./signin"
+
 import { Button, Checkbox, Input ,DatePicker,Drawer } from 'antd';
-import Header, { UserHeader } from '../Header/Header';
+
 import ForgotPassword from './ForgotPassword';
-import { FacebookOutlined, TwitterOutlined, GoogleOutlined, InstagramOutlined, YoutubeOutlined } from '@ant-design/icons';
+import { FacebookOutlined, TwitterOutlined } from '@ant-design/icons';
+import OAuth from '../SocialLoginbtns/OAuth';
+import { useNavigate } from 'react-router-dom';
+import { onAuthStateChanged } from '@firebase/auth';
+import { auth } from '../../firebase';
 
 
 
@@ -15,8 +19,34 @@ import { FacebookOutlined, TwitterOutlined, GoogleOutlined, InstagramOutlined, Y
   function Login() {
     const [counter, setCounter] = useState(1);
     const[register,setRegister]=useState(true)
-
+const[userName,setUserName]=useState("")
+const[password,setPassword]=useState("")
     const [open, setOpen] = useState(false);
+const navigate=useNavigate()
+
+
+    useEffect(() => {
+      const unsubscribe = onAuthStateChanged(auth, (result) => {
+        if (result) {
+  
+        
+        navigate("/")
+  
+        
+        } 
+  
+      })
+  
+      return () => unsubscribe();
+    },[])
+
+
+
+
+
+
+
+
   const showDrawer = () => {
     setOpen(true);
   };
@@ -38,11 +68,20 @@ import { FacebookOutlined, TwitterOutlined, GoogleOutlined, InstagramOutlined, Y
         console.log(date, dateString);
       };
 
+      const handleSubmit = (e) => {
+      
+        e.preventDefault();
+        if (userName === "venkat@gmail.com" && password === "venkat") {
+      localStorage.setItem("username",userName)
+          navigate("/admindashboard");
+        }
+      };
+      
        
-  
+ console.log({userName,password}) 
    return (
     <>
-   <UserHeader/>
+  
     <div className="sliders">
     <div className="sliders__left">
       <div className="slides">
@@ -108,10 +147,10 @@ import { FacebookOutlined, TwitterOutlined, GoogleOutlined, InstagramOutlined, Y
       <form className="login-form">
       <h2 className="login-header">Log in</h2>
         
-          <Input className='input-field' type="email" placeholder="Email" />
+          <Input className='input-field' type="email" placeholder="Email" onChange={(e)=>setUserName(e.target.value)}/>
        
       
-          <Input.Password className='input-field' type="password" placeholder="Password" />
+          <Input.Password className='input-field' type="password" placeholder="Password"  onChange={(e)=>setPassword(e.target.value)}/>
        
           <div className='forgot-password'>
      <div className='remember'>
@@ -125,7 +164,7 @@ import { FacebookOutlined, TwitterOutlined, GoogleOutlined, InstagramOutlined, Y
    </span>
 </div>
         <div className='login-btns '>
-          <button className='submit-btn' >Login</button>
+          <button className='submit-btn' onClick={handleSubmit} >Login</button>
           
          
           </div>
@@ -133,9 +172,14 @@ import { FacebookOutlined, TwitterOutlined, GoogleOutlined, InstagramOutlined, Y
       <Button type="primary" shape="circle" className="btn" href="#">
         <FacebookOutlined />
       </Button>
-      <Button type="primary" shape="circle" className="btn" href="#">
-        <GoogleOutlined />
+      <Button type="primary" shape="circle" className="btn" >
+      <OAuth/>
       </Button>
+     
+       
+       
+        
+      
       <Button type="primary" shape="circle" className="btn" href="#">
         <TwitterOutlined />
       </Button>
